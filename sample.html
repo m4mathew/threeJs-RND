@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+<script src="js/three.js"></script>
+<script src="js/DragControls.js"></script>
+ <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+ <script type="text/babel">
+      ReactDOM.render(
+        <h1>Hello, world!</h1>,
+        document.getElementById('root')
+      );
+
+var container, stats;
+var camera, controls, scene, renderer;
+var objects = [];
+init();
+animate();
+function init()
+{
+objects = [];
+scene = new THREE.Scene();
+camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( { color: 0x005eff } );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+objects.push( cube );
+
+camera.position.z = 5;
+var dragControls = new THREE.DragControls( objects, camera, renderer.domElement);
+
+
+
+
+window.addEventListener( 'resize', onWindowResize, false );
+}
+function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+function animate() {
+				requestAnimationFrame( animate );
+				render();
+				
+			}
+function render() {
+				
+				renderer.render( scene, camera );
+			}
+
+		</script>
+	
+  
+
+  <div id="root"></div>
+  </body>
+</html>
